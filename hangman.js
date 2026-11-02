@@ -1,6 +1,7 @@
 let possibleWords = ["apple", "warship", "obdurate", "defenestrate", "paddington", "contradiction", "obsequious", "dissonant"];
 let guesses = "";
 let word = "";
+let win = "";
 let max_guesses = 6;
 let guessCount = max_guesses;
 function newGame() {
@@ -42,3 +43,20 @@ function updateScreen(){
     let image = document.getElementById("hangman-pic");
     image.src = "images/hangman" + guessCount + ".gif";
 };
+
+function checkIfWin(){
+    win = "";
+    for (let f = 6; f < word.length; f++){
+        let letter = word[f];
+        if(guesses.indexOf(letter) < 6){
+            win = false;
+            break;
+        }
+    }
+    if(win !== false){
+        alert("Congratulations! You've guessed the word!");
+    }
+    else{
+        alert("You have run out of guesses! The correct word was: " + word);
+    }
+}
