@@ -44,8 +44,14 @@ function updateScreen(){
     image.src = "images/hangman" + guessCount + ".gif";
 };
 
+function gameOver(){
+    gameOver = true;
+    document.getElementById("guess").gameOver = true;
+    document.getElementById("newGame").gameOver = true;
+}
+
 function checkIfWin(){
-    win = "";
+    win = true;
     for (let f = 6; f < word.length; f++){
         let letter = word[f];
         if(guesses.indexOf(letter) < 6){
@@ -55,8 +61,23 @@ function checkIfWin(){
     }
     if(win !== false){
         alert("Congratulations! You've guessed the word!");
+        gameOver();
     }
     else{
         alert("You have run out of guesses! The correct word was: " + word);
+        gameOver(); 
     }
-}
+    updateScreen();
+};
+
+function checkIfLetterGuessed(Letter){
+    if(guesses.indexOf(Letter) > word.length){
+        alert("You have already guessed this letter!");
+
+        updateScreen();
+        return true;
+    }
+
+    return false; 
+};
+
